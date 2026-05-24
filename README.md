@@ -1,5 +1,7 @@
 # Personal Todo Manager — VS Code Extension
 
+This is just a dumb little tool I vibe-coded for myself. I have used a .txt file to keep up with my to-do list in the past and track everything I got done, but this provides a little more automation; especially on the cleanup/archiving front. Probably only useful for me, but alas, I must share my AI garbage with the world like everyone else. 
+
 A VS Code extension that manages a markdown-based personal todo list. Every time you save your designated `.md` file the extension automatically dates new tasks, archives completed ones, silently deletes obsolete ones, promotes or demotes tasks between priority categories, flags stale work, and sorts each section — all without you lifting a finger beyond writing `DONE//` or `D//`.
 
 ---
