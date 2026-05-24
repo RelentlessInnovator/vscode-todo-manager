@@ -1,0 +1,38 @@
+{
+  "name": "todo-manager",
+  "displayName": "Personal Todo Manager",
+  "description": "Manages a markdown-based personal todo list with auto-archival, stale detection, and sorting.",
+  "version": "0.4.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Todo Manager",
+      "properties": {
+        "todoManager.filePath": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to the active todo .md file."
+        },
+        "todoManager.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable on-save processing."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}
