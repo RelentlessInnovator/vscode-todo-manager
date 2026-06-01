@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "PowerShell(Get-Command node, npm, npx -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\\" -ErrorAction SilentlyContinue | Select-Object Name | Where-Object { $_.Name -match \"node|nvm\" })",
+      "Bash(find \"/mnt/c/Users/MixedSignalsWS/OneDrive/Projects/To Do List\" -type f | sort)"
+    ]
+  }
+}

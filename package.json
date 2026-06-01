@@ -2,7 +2,7 @@
   "name": "todo-manager",
   "displayName": "Personal Todo Manager",
   "description": "Manages a markdown-based personal todo list with auto-archival, stale detection, and sorting.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "engines": {
     "vscode": "^1.85.0"
   },

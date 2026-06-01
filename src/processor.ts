@@ -10,7 +10,6 @@ import {
   hasObeTag,
   hasPromoTag,
   getPromoTag,
-  hasStatusTag,
   hasStaleTag,
   setStaleTag,
   removeStaleTag,
@@ -53,9 +52,6 @@ export function processTodoFile(filePath: string, log: vscode.OutputChannel): st
 
   // Step 5: Stale Tagging
   step5_stale(doc, meta);
-
-  // Step 6: Sorting
-  step6_sort(doc);
 
   // Serialize — caller writes back via VS Code API to avoid file-lock conflict
   const output = serializeDoc(doc);
@@ -162,7 +158,7 @@ function step4_promo(doc: ParsedDoc, meta: TodoMeta, log: vscode.OutputChannel):
       } else {
         const direction = dstPriority < srcPriority ? "upgraded" : "downgraded";
         family.parent = applyPromoResult(family.parent, direction);
-        doc.sections[destCat].push(family);
+        doc.sections[destCat].unshift(family);
         updateLastModified(meta, family.parent);
         log.appendLine(`[promo] Moved "${family.parent.trim()}" from ${cat} to ${destCat} (${direction})`);
       }
@@ -195,15 +191,3 @@ function step5_stale(doc: ParsedDoc, meta: TodoMeta): void {
 // ---------------------------------------------------------------------------
 // Step 6
 // ---------------------------------------------------------------------------
-function taskSortKey(family: TaskFamily): number {
-  // 0 = has status tag (bubbles to top), 1 = untagged, 2 = stale
-  if (hasStaleTag(family.parent)) { return 2; }
-  if (hasStatusTag(family.parent)) { return 0; }
-  return 1;
-}
-
-function step6_sort(doc: ParsedDoc): void {
-  for (const cat of CATEGORIES) {
-    doc.sections[cat].sort((a, b) => taskSortKey(a) - taskSortKey(b));
-  }
-}

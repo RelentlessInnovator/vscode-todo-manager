@@ -170,16 +170,8 @@ Applies to **Urgent**, **Important**, and **Normal** only. **Backlog is fully ex
 - If any subtask in the family had a status tag change since the last save, the stale timer resets for the whole family and the `STALE<N>//` tag is removed.
 - The stale tag appears on the **parent line only**.
 
-### 6 — Sorting
-Within each category, top-level task families (parent + subtasks as one unit) are sorted:
-
-| Priority | Condition |
-|---|---|
-| 1 (top) | Has a status tag (`IN PROGRESS//`, `WAITING//`, etc.) |
-| 2 | No special tag |
-| 3 (bottom) | Has a `STALE<N>//` tag |
-
-Subtask order within each parent block is always preserved. Category heading order (Urgent → Important → Normal → Backlog) is always preserved.
+### 6 — Order Preservation
+Tasks stay exactly where you put them within each category. The extension never reorders tasks automatically. The only exception is promotion/demotion (step 4), where a moved task lands at the **top** of its destination category so it is immediately visible.
 
 ### 7 — Cleanup
 Consecutive blank lines between task families are collapsed to a single blank line. All four category headings are always present even if the section is empty.

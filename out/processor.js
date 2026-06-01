@@ -68,8 +68,6 @@ function processTodoFile(filePath, log) {
     step4_promo(doc, meta, log);
     // Step 5: Stale Tagging
     step5_stale(doc, meta);
-    // Step 6: Sorting
-    step6_sort(doc);
     // Serialize — caller writes back via VS Code API to avoid file-lock conflict
     const output = (0, parser_1.serializeDoc)(doc);
     // Step 7: Update meta after all mutations
@@ -173,7 +171,7 @@ function step4_promo(doc, meta, log) {
             else {
                 const direction = dstPriority < srcPriority ? "upgraded" : "downgraded";
                 family.parent = (0, tags_1.applyPromoResult)(family.parent, direction);
-                doc.sections[destCat].push(family);
+                doc.sections[destCat].unshift(family);
                 (0, meta_1.updateLastModified)(meta, family.parent);
                 log.appendLine(`[promo] Moved "${family.parent.trim()}" from ${cat} to ${destCat} (${direction})`);
             }
@@ -209,19 +207,4 @@ function step5_stale(doc, meta) {
 // ---------------------------------------------------------------------------
 // Step 6
 // ---------------------------------------------------------------------------
-function taskSortKey(family) {
-    // 0 = has status tag (bubbles to top), 1 = untagged, 2 = stale
-    if ((0, tags_1.hasStaleTag)(family.parent)) {
-        return 2;
-    }
-    if ((0, tags_1.hasStatusTag)(family.parent)) {
-        return 0;
-    }
-    return 1;
-}
-function step6_sort(doc) {
-    for (const cat of types_1.CATEGORIES) {
-        doc.sections[cat].sort((a, b) => taskSortKey(a) - taskSortKey(b));
-    }
-}
 //# sourceMappingURL=processor.js.map
